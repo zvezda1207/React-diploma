@@ -191,10 +191,25 @@ export default function Catalog({ enableSearch = false, initialSearchQuery = '' 
                 ))}
             </div>
 
-            {hasMore && !loadingItems && !errorItems && (
+            {hasMore && !errorItems && (
                 <div className="text-center">
-                    <button className="btn btn-outline-primary" onClick={handleLoadMore}>
-                        Загрузить ещё
+                    {loadingItems && items.length > 0 && (
+                        <div className="my-3">
+                            <div className="preloader">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                            <p className="mt-2">Загрузка товаров...</p>
+                        </div>
+                    )}
+                    <button
+                        className="btn btn-outline-primary"
+                        onClick={handleLoadMore}
+                        disabled={loadingItems}
+                    >
+                        {loadingItems ? 'Загрузка...' : 'Загрузить ещё'}
                     </button>
                 </div>
             )}
